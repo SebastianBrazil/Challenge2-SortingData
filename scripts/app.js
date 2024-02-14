@@ -1,3 +1,5 @@
+import { popData } from "./popData.js";
+
 let firstNameI = document.getElementById("firstNameI");
 let lastNameI = document.getElementById("lastNameI");
 let ageI = document.getElementById("ageI");
@@ -32,6 +34,7 @@ let perPage = 10;
 let onDisplay = 10;
 let counter = 0;
 
+// The main function, calls fetch
 const fetchData = async () => {
     const promise = await fetch('../data/data.json');
     const data = await promise.json();
@@ -49,43 +52,8 @@ const fetchData = async () => {
         sortID();
     };
 };
-function popData(useData) {
-    namePlacement.innerHTML = "";
 
-    useData.forEach(person => {
-        if (counter < onDisplay) {
-            let holderDiv = document.createElement("div");
-            holderDiv.className = "my-2 grid grid-cols-5";
-
-            let Fname = document.createElement('p');
-            Fname.className = "col-span-1 mx-1 p-1 text-xl";
-            Fname.innerText = person.FirstName;
-            let Lname = document.createElement('p');
-            Lname.className = "col-span-1 mx-1 p-1 text-xl";
-            Lname.innerText = person.LastName;
-            let Age = document.createElement('p');
-            Age.className = "col-span-1 mx-1 p-1 text-xl";
-            Age.innerText = person.Age;
-            let Height = document.createElement('p');
-            Height.className = "col-span-1 mx-1 p-1 text-xl";
-            Height.innerText = person.Height;
-            let IDidIDid = document.createElement('p');
-            IDidIDid.className = "col-span-1 mx-1 p-1 text-xl";
-            IDidIDid.innerText = person.Id;
-
-            holderDiv.appendChild(Fname);
-            holderDiv.appendChild(Lname);
-            holderDiv.appendChild(Age);
-            holderDiv.appendChild(Height);
-            holderDiv.appendChild(IDidIDid);
-            namePlacement.appendChild(holderDiv);
-
-            counter++;
-        };
-    });
-    counter = counter - perPage;
-};
-
+// Page amount eventlisteners keep track of how many elements should be displayed per page
 page10.addEventListener('click', function () {
     trackPage = 1;
     onPage.innerText = trackPage;
@@ -132,6 +100,7 @@ page50.addEventListener('click', function () {
     fetchData();
 });
 
+// Page move eventListeners keep track of what page the user is on
 prevPage.addEventListener('click', function () {
     if (trackPage !== 1) {
         trackPage--;
@@ -153,21 +122,28 @@ nextPage.addEventListener('click', function () {
     };
 });
 
+// Reverse eventListener swaps the direction of the displayed data
 reverseDirection.addEventListener('click', function () {
     if (isReversed === false) {
         isReversed = true;
     } else {
         isReversed = false;
     };
+    trackPage = 1;
+    onPage.innerText = trackPage;
     fetchData();
 });
 
+// I eventListeners swap the prerequisites for displaying data
 firstNameI.addEventListener('click', function () {
     isFn = true;
     isLn = false;
     isAge = false;
     isHeight = false;
     isID = false;
+    isReversed = false;
+    trackPage = 1;
+    onPage.innerText = trackPage;
     fetchData();
 });
 lastNameI.addEventListener('click', function () {
@@ -176,6 +152,9 @@ lastNameI.addEventListener('click', function () {
     isAge = false;
     isHeight = false;
     isID = false;
+    isReversed = false;
+    trackPage = 1;
+    onPage.innerText = trackPage;
     fetchData();
 });
 ageI.addEventListener('click', function () {
@@ -184,6 +163,9 @@ ageI.addEventListener('click', function () {
     isAge = true;
     isHeight = false;
     isID = false;
+    isReversed = false;
+    trackPage = 1;
+    onPage.innerText = trackPage;
     fetchData();
 });
 heightI.addEventListener('click', function () {
@@ -192,6 +174,9 @@ heightI.addEventListener('click', function () {
     isAge = false;
     isHeight = true;
     isID = false;
+    isReversed = false;
+    trackPage = 1;
+    onPage.innerText = trackPage;
     fetchData();
 });
 idI.addEventListener('click', function () {
@@ -200,9 +185,60 @@ idI.addEventListener('click', function () {
     isAge = false;
     isHeight = false;
     isID = true;
+    isReversed = false;
+    trackPage = 1;
+    onPage.innerText = trackPage;
     fetchData();
 });
 
+// this function splits the sorted data into subarrays, which alloys for array switching when changing pages
+function paginate(newData) {
+    let realNewData = [];
+    if (perPage === 50) {
+        let holderArr = newData;
+        let dataArr1 = holderArr.splice(0, 50);
+        let dataArr2 = holderArr.splice(0, 50);
+        realNewData = [dataArr1, dataArr2];
+    } else if (perPage === 40) {
+        let holderArr = newData;
+        let dataArr1 = holderArr.splice(0, 40);
+        let dataArr2 = holderArr.splice(0, 40);
+        let dataArr3 = holderArr.splice(0, 20);
+        realNewData = [dataArr1, dataArr2, dataArr3];
+    } else if (perPage === 30) {
+        let holderArr = newData;
+        let dataArr1 = holderArr.splice(0, 30);
+        let dataArr2 = holderArr.splice(0, 30);
+        let dataArr3 = holderArr.splice(0, 30);
+        let dataArr4 = holderArr.splice(0, 10);
+        realNewData = [dataArr1, dataArr2, dataArr3, dataArr4];
+    } else if (perPage === 20) {
+        let holderArr = newData;
+        let dataArr1 = holderArr.splice(0, 20);
+        let dataArr2 = holderArr.splice(0, 20);
+        let dataArr3 = holderArr.splice(0, 20);
+        let dataArr4 = holderArr.splice(0, 20);
+        let dataArr5 = holderArr.splice(0, 20);
+        realNewData = [dataArr1, dataArr2, dataArr3, dataArr4, dataArr5];
+    } else {
+        let holderArr = newData;
+        let dataArr1 = holderArr.splice(0, 10);
+        let dataArr2 = holderArr.splice(0, 10);
+        let dataArr3 = holderArr.splice(0, 10);
+        let dataArr4 = holderArr.splice(0, 10);
+        let dataArr5 = holderArr.splice(0, 10);
+        let dataArr6 = holderArr.splice(0, 10);
+        let dataArr7 = holderArr.splice(0, 10);
+        let dataArr8 = holderArr.splice(0, 10);
+        let dataArr9 = holderArr.splice(0, 10);
+        let dataArr10 = holderArr.splice(0, 10);
+        realNewData = [dataArr1, dataArr2, dataArr3, dataArr4, dataArr5, dataArr6, dataArr7, dataArr8, dataArr9, dataArr10];
+    };
+
+    popData(namePlacement, trackPage, counter, onDisplay, perPage, realNewData);
+}
+
+// these sort functions sort the globalData array into the prerequisite requirements.
 function sortFN() {
     let sortThisArray = [];
     let newData = [];
@@ -214,6 +250,7 @@ function sortFN() {
     if (isReversed === false) {
         sortThisArray.sort().forEach(firstName => {
             globalData.forEach(person => {
+                // if (person.FirstName === firstName && person.Id !== newData) {
                 if (person.FirstName === firstName) {
                     newData.push(person);
                 };
@@ -230,7 +267,7 @@ function sortFN() {
     };
 
     typeSort.innerText = "First Name"
-    popData(newData);
+    paginate(newData);
 };
 function sortLN() {
     let sortThisArray = [];
@@ -259,7 +296,7 @@ function sortLN() {
     };
 
     typeSort.innerText = "Last Name"
-    popData(newData);
+    paginate(newData);
 };
 function sortAge() {
     let sortThisArray = [];
@@ -288,7 +325,7 @@ function sortAge() {
     };
 
     typeSort.innerText = "Age"
-    popData(newData);
+    paginate(newData);
 };
 function sortHeight() {
     let sortThisArray = [];
@@ -326,7 +363,7 @@ function sortHeight() {
     };
 
     typeSort.innerText = "Height"
-    popData(newData);
+    paginate(newData);
 };
 function sortID() {
     let sortThisArray = [];
@@ -355,7 +392,8 @@ function sortID() {
     };
 
     typeSort.innerText = "ID"
-    popData(newData);
+    paginate(newData);
 };
 
+// Initializes fetchData
 fetchData();
