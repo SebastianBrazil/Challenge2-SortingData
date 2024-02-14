@@ -16,6 +16,7 @@ let amountPage = document.getElementById("amountPage");
 let prevPage = document.getElementById("prevPage");
 let nextPage = document.getElementById("nextPage");
 let onPage = document.getElementById("onPage");
+let reverseDirection = document.getElementById("reverseDirection");
 
 let globalData = [];
 let isFn = true;
@@ -23,6 +24,7 @@ let isLn = false;
 let isAge = false;
 let isHeight = false;
 let isID = false;
+let isReversed = false;
 
 let trackPage = 1;
 let perPage = 10;
@@ -39,14 +41,14 @@ const fetchData = async () => {
         sortFN();
     } else if (isLn) {
         sortLN();
-    }else if (isAge) {
+    } else if (isAge) {
         sortAge();
-    }else if (isHeight) {
+    } else if (isHeight) {
         sortHeight();
-    }else if (isID) {
+    } else if (isID) {
         sortID();
     };
-}
+};
 function popData(useData) {
     namePlacement.innerHTML = "";
 
@@ -86,6 +88,7 @@ function popData(useData) {
 
 page10.addEventListener('click', function () {
     trackPage = 1;
+    onPage.innerText = trackPage;
     perPage = 10;
     onDisplay = 10;
     counter = 0;
@@ -94,6 +97,7 @@ page10.addEventListener('click', function () {
 });
 page20.addEventListener('click', function () {
     trackPage = 1;
+    onPage.innerText = trackPage;
     perPage = 20;
     onDisplay = 20;
     counter = 0;
@@ -102,6 +106,7 @@ page20.addEventListener('click', function () {
 });
 page30.addEventListener('click', function () {
     trackPage = 1;
+    onPage.innerText = trackPage;
     perPage = 30;
     onDisplay = 30;
     counter = 0;
@@ -110,6 +115,7 @@ page30.addEventListener('click', function () {
 });
 page40.addEventListener('click', function () {
     trackPage = 1;
+    onPage.innerText = trackPage;
     perPage = 40;
     onDisplay = 40;
     counter = 0;
@@ -118,6 +124,7 @@ page40.addEventListener('click', function () {
 });
 page50.addEventListener('click', function () {
     trackPage = 1;
+    onPage.innerText = trackPage;
     perPage = 50;
     onDisplay = 50;
     counter = 0;
@@ -144,6 +151,15 @@ nextPage.addEventListener('click', function () {
 
         fetchData();
     };
+});
+
+reverseDirection.addEventListener('click', function () {
+    if (isReversed === false) {
+        isReversed = true;
+    } else {
+        isReversed = false;
+    };
+    fetchData();
 });
 
 firstNameI.addEventListener('click', function () {
@@ -195,13 +211,23 @@ function sortFN() {
         sortThisArray.push(person.FirstName);
     });
 
-    sortThisArray.sort().forEach(firstName => {
-        globalData.forEach(person => {
-            if (person.FirstName === firstName) {
-                newData.push(person);
-            };
+    if (isReversed === false) {
+        sortThisArray.sort().forEach(firstName => {
+            globalData.forEach(person => {
+                if (person.FirstName === firstName) {
+                    newData.push(person);
+                };
+            });
         });
-    });
+    } else {
+        sortThisArray.sort().reverse().forEach(firstName => {
+            globalData.forEach(person => {
+                if (person.FirstName === firstName) {
+                    newData.push(person);
+                };
+            });
+        });
+    };
 
     typeSort.innerText = "First Name"
     popData(newData);
@@ -214,13 +240,23 @@ function sortLN() {
         sortThisArray.push(person.LastName);
     });
 
-    sortThisArray.sort().forEach(lastName => {
-        globalData.forEach(person => {
-            if (person.LastName === lastName) {
-                newData.push(person);
-            };
+    if (isReversed === false) {
+        sortThisArray.sort().forEach(lastName => {
+            globalData.forEach(person => {
+                if (person.LastName === lastName) {
+                    newData.push(person);
+                };
+            });
         });
-    });
+    } else {
+        sortThisArray.sort().reverse().forEach(lastName => {
+            globalData.forEach(person => {
+                if (person.LastName === lastName) {
+                    newData.push(person);
+                };
+            });
+        });
+    };
 
     typeSort.innerText = "Last Name"
     popData(newData);
@@ -233,13 +269,23 @@ function sortAge() {
         sortThisArray.push(person.Age);
     });
 
-    sortThisArray.sort().forEach(age => {
-        globalData.forEach(person => {
-            if (person.Age === age) {
-                newData.push(person);
-            };
+    if (isReversed === false) {
+        sortThisArray.sort().forEach(age => {
+            globalData.forEach(person => {
+                if (person.Age === age) {
+                    newData.push(person);
+                };
+            });
         });
-    });
+    } else {
+        sortThisArray.sort().reverse().forEach(age => {
+            globalData.forEach(person => {
+                if (person.Age === age) {
+                    newData.push(person);
+                };
+            });
+        });
+    };
 
     typeSort.innerText = "Age"
     popData(newData);
@@ -249,16 +295,35 @@ function sortHeight() {
     let newData = [];
 
     globalData.forEach(person => {
-        sortThisArray.push(person.FirstName);
+        sortThisArray.push(person.Height);
     });
 
-    sortThisArray.sort().forEach(firstName => {
-        globalData.forEach(person => {
-            if (person.FirstName === firstName) {
-                newData.push(person);
-            };
-        });
+    sortThisArray = [...sortThisArray].map(string => {
+        string = string.split(" inches");
+        return string[0];
     });
+
+    if (isReversed === false) {
+        sortThisArray.sort(function (a, b) { return a - b }).forEach(height => {
+            globalData.forEach(person => {
+                let Height = person.Height;
+                Height = Height.split(" inches");
+                if (Height[0] === height) {
+                    newData.push(person);
+                };
+            });
+        });
+    } else {
+        sortThisArray.sort(function (a, b) { return a - b }).reverse().forEach(height => {
+            globalData.forEach(person => {
+                let Height = person.Height;
+                Height = Height.split(" inches");
+                if (Height[0] === height) {
+                    newData.push(person);
+                };
+            });
+        });
+    };
 
     typeSort.innerText = "Height"
     popData(newData);
@@ -271,23 +336,26 @@ function sortID() {
         sortThisArray.push(person.Id);
     });
 
-    sortThisArray.sort(function(a, b) {return a - b}).forEach(id => {
-        globalData.forEach(person => {
-            if (person.Id === id) {
-                newData.push(person);
-            };
+    if (isReversed === false) {
+        sortThisArray.sort(function (a, b) { return a - b }).forEach(id => {
+            globalData.forEach(person => {
+                if (person.Id === id) {
+                    newData.push(person);
+                };
+            });
         });
-    });
+    } else {
+        sortThisArray.sort(function (a, b) { return a - b }).reverse().forEach(id => {
+            globalData.forEach(person => {
+                if (person.Id === id) {
+                    newData.push(person);
+                };
+            });
+        });
+    };
 
     typeSort.innerText = "ID"
     popData(newData);
 };
-
-
-
-
-
-
-
 
 fetchData();
