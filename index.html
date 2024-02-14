@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Doing Stuff</title>
+  <link rel="stylesheet" href="./dist/output.css">
+</head>
+
+<body>
+  <!-- Tailwind Classes for elements added to JS -->
+  <div style="display: none;" class="">
+  </div>
+
+  <div class="flex justify-center h-full min-h-screen bg-red-400 pb-6">
+    <div class="w-7/12">
+      <div class="text-center">
+        <p class="my-10 bg-blue-400 rounded-lg py-1 text-3xl">dataHarvester.Display</p>
+
+        <div class="flex justify-center m-5">
+          <button id="firstNameI"
+            class="mx-2 w-64 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">Sort
+            By First Name</button>
+          <button id="lastNameI"
+            class="mx-2 w-64 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">Sort
+            By Last Name</button>
+          <button id="ageI"
+            class="mx-2 w-64 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">Sort
+            By Age</button>
+          <button id="heightI"
+            class="mx-2 w-64 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">Sort
+            By Height</button>
+          <button id="idI"
+            class="mx-2 w-64 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-xl px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">Sort
+            By ID</button>
+        </div>
+      </div>
+
+      <div class="rounded-lg bg-slate-500 pb-5 pt-2 mx-1">
+        <div class="flex justify-center">
+          <div class="my-2 py-1 text-center w-3/4 bg-blue-400">
+            <p class="text-2xl">Sorting By:
+              <span id="typeSort">First Name</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <div id="namePlacement" class="mb-2 text-center w-3/4 bg-blue-400">
+            <div class="my-2 grid grid-cols-5">
+              <p class="col-span-1 mx-1 p-1 text-xl">First Name</p>
+              <p class="col-span-1 mx-1 p-1 text-xl">Last Name</p>
+              <p class="col-span-1 mx-1 p-1 text-xl">Age</p>
+              <p class="col-span-1 mx-1 p-1 text-xl">Height</p>
+              <p class="col-span-1 mx-1 p-1 text-xl">ID</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="text-center">
+          <div class="flex justify-center m-5">
+            <button id="prevPage"
+              class="mx-3 w-16 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white"> &lt;- </button>
+
+            <p class="mx-3 w-52 mb-6 bg-blue-400 rounded-lg px-5 py-2.5 text-lg">On Page: <span id="onPage">1</span> </p>
+
+            <button id="nextPage"
+              class="mx-3 w-16 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white"> -&gt; </button>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="mx-64 bg-blue-400 rounded-lg py-1 text-xl">Amount Per Page: <span id="amountPage">10</span></p>
+          
+          <div class="flex justify-center m-5">
+            <button id="page10"
+              class="mx-3 w-16 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">10</button>
+            <button id="page20"
+              class="mx-3 w-16 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">20</button>
+            <button id="page30"
+              class="mx-3 w-16 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">30</button>
+            <button id="page40"
+              class="mx-3 w-16 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">40</button>
+            <button id="page50"
+              class="mx-3 w-16 block bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-lg px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 mb-6 bg-white">50</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="./scripts/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+
+</html>
