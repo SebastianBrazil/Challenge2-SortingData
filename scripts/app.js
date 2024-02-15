@@ -235,6 +235,7 @@ function paginate(newData) {
         realNewData = [dataArr1, dataArr2, dataArr3, dataArr4, dataArr5, dataArr6, dataArr7, dataArr8, dataArr9, dataArr10];
     };
 
+    // calls imported function that populates all data
     popData(namePlacement, trackPage, counter, onDisplay, perPage, realNewData);
 }
 
@@ -250,8 +251,7 @@ function sortFN() {
     if (isReversed === false) {
         sortThisArray.sort().forEach(firstName => {
             globalData.forEach(person => {
-                // if (person.FirstName === firstName && person.Id !== newData) {
-                if (person.FirstName === firstName) {
+                if (person.FirstName === firstName && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
@@ -259,7 +259,7 @@ function sortFN() {
     } else {
         sortThisArray.sort().reverse().forEach(firstName => {
             globalData.forEach(person => {
-                if (person.FirstName === firstName) {
+                if (person.FirstName === firstName && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
@@ -280,7 +280,7 @@ function sortLN() {
     if (isReversed === false) {
         sortThisArray.sort().forEach(lastName => {
             globalData.forEach(person => {
-                if (person.LastName === lastName) {
+                if (person.LastName === lastName && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
@@ -288,7 +288,7 @@ function sortLN() {
     } else {
         sortThisArray.sort().reverse().forEach(lastName => {
             globalData.forEach(person => {
-                if (person.LastName === lastName) {
+                if (person.LastName === lastName && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
@@ -309,7 +309,7 @@ function sortAge() {
     if (isReversed === false) {
         sortThisArray.sort().forEach(age => {
             globalData.forEach(person => {
-                if (person.Age === age) {
+                if (person.Age === age && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
@@ -317,7 +317,7 @@ function sortAge() {
     } else {
         sortThisArray.sort().reverse().forEach(age => {
             globalData.forEach(person => {
-                if (person.Age === age) {
+                if (person.Age === age && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
@@ -345,7 +345,7 @@ function sortHeight() {
             globalData.forEach(person => {
                 let Height = person.Height;
                 Height = Height.split(" inches");
-                if (Height[0] === height) {
+                if (Height[0] === height && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
@@ -355,7 +355,7 @@ function sortHeight() {
             globalData.forEach(person => {
                 let Height = person.Height;
                 Height = Height.split(" inches");
-                if (Height[0] === height) {
+                if (Height[0] === height && newData.every(fullPerson => fullPerson.Id !== person.Id)) {
                     newData.push(person);
                 };
             });
